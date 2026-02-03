@@ -1,0 +1,9 @@
+metric,aggregation,value
+precision,micro,0.678
+recall,micro,0.87
+f1,micro,0.762
+mae_px,micro,3.359
+precision,macro,0.684
+recall,macro,0.866
+f1,macro,0.76
+mae_px,macro,3.354

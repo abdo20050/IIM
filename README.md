@@ -93,6 +93,45 @@ This repo is the official implementation of [paper](https://arxiv.org/abs/2012.0
   - ```pred_file```.  
 - Run  ```python vis4val.py```. 
 
+## Video Inference and Evaluation (`pred.py`)
+
+Use `pred.py` to run a trained model on a video, visualize detections, and optionally evaluate against a ground-truth CSV.
+
+- Basic usage (GPU if available):
+
+```bash
+python pred.py --input input_vid.mp4 --output output_vid.mp4 --model path/to/model.pth
+```
+
+- Force CPU-only (no CUDA/cuDNN required):
+
+```bash
+CUDA_VISIBLE_DEVICES='' python pred.py --input input_vid.mp4 --output output_vid.mp4 --model path/to/model.pth --gpu ''
+```
+
+- Important CLI options:
+  - `--gt`: optional ground-truth file (CSV or whitespace-delimited). Expected row format: `frame_key count x1 y1 x2 y2 ...` where `frame_key` can be a frame index or filename (with or without extension).
+  - `--match_dist`: pixel distance threshold for matching predicted points to GT (default 20.0).
+  - `--out_dir`: directory to save exported reports (JSON and per-frame CSV). Defaults to the `--output` directory.
+  - `--verbose`: print per-frame timing and basic per-frame stats to stdout.
+
+- Output produced when `--gt` is provided:
+  - `<basename>_metrics.json` — micro/macro averages and metadata.
+  - `<basename>_frame_metrics.csv` — per-frame rows with TP/FP/FN, precision, recall, F1, MAE, and processing time.
+  - `<basename>_summary.csv` — compact summary of micro/macro metrics.
+
+- Example with GT and reports:
+
+```bash
+python pred.py --input input_vid.mp4 --output output_vid.mp4 --model path/to/model.pth \
+  --gt input_vid_gt.csv --match_dist 20 --out_dir reports --verbose
+```
+
+Notes:
+- The script uses Hungarian (linear sum assignment) matching between predicted and GT points to compute TP/FP/FN and F1/recall.
+- If you only have backbone weights (not a full trained checkpoint) `pred.py` may fail to load a full model — use a full-model checkpoint from `saved_exp_results/*`.
+
+
 # Performance
 
 The results (F1, Pre., Rec. under the `sigma_l`) and [pre-trained models](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EliCeOckaZVBgez6n8ZWvr4BNdwPauFJgbm88MGhHid25w?e=rtogwc) on NWPU val set, UCF-QNRF, SHT A, SHT B, and FDST:

@@ -1,0 +1,22 @@
+{
+    "video_file": "input_vid.mp4",
+    "total_frames": 120,
+    "avg_frame_time_s": 0.206,
+    "std_frame_time_s": 0.003,
+    "min_frame_time_s": 0.196,
+    "max_frame_time_s": 0.209,
+    "raw": {
+        "micro": {
+            "precision": 0.678,
+            "recall": 0.87,
+            "f1": 0.762,
+            "mae_px": 3.359
+        },
+        "macro": {
+            "precision": 0.684,
+            "recall": 0.866,
+            "f1": 0.76,
+            "mae_px": 3.354
+        }
+    }
+}

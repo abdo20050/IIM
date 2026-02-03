@@ -1,0 +1,7 @@
+*.mp4
+*.pth
+*.onnx
+*.zip
+*.tar.gz
+*/__pycache__/
+.ipynb_checkpoints/

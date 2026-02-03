@@ -1,0 +1,23 @@
+HRnet
+{
+    "video_file": "input_vid.mp4",
+    "total_frames": 120,
+    "avg_frame_time_s": 0.343,
+    "std_frame_time_s": 0.021,
+    "min_frame_time_s": 0.296,
+    "max_frame_time_s": 0.379,
+    "raw": {
+        "micro": {
+            "precision": 0.941,
+            "recall": 0.861,
+            "f1": 0.899,
+            "mae_px": 3.044
+        },
+        "macro": {
+            "precision": 0.942,
+            "recall": 0.861,
+            "f1": 0.9,
+            "mae_px": 3.043
+        }
+    }
+}
